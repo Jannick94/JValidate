@@ -4,3 +4,7 @@
 .is-valid {
 	border-color: #43A047;
 }
+
+.has-warning {
+	border-color: orange;
+}
