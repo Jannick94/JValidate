@@ -1,0 +1,6 @@
+.has-error {
+	border-color: #E53935;
+}
+.is-valid {
+	border-color: #43A047;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>JValidate</h1>
+			<hr>
+
+			<form action="" method="post" class="jvalidate-form">
+				<div class="form-group">
+					<input type="text" class="form-control" name="voornaam" placeholder="Voornaam" data-validation="required">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="achternaam" placeholder="Achternaam" data-validation="required">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="iban" placeholder="IBAN" data-validation="required|iban">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="number" placeholder="Nummer" data-validation="number">
+				</div>
+
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/iban.js"></script>
+<script type="text/javascript" src="js/jvalidate.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+
+		$('.jvalidate-form').jvalidate({
+			validColor: 'green'
+		});
+
+	})
+</script>
+
+</body>
+</html>
