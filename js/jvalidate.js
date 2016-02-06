@@ -20,7 +20,7 @@ $(function() {
 			validationValue,
 			switchCase,
 			args,
-			messageLocale
+			messageLocale,
 			isValid;
 
 		/* Serialize the form */
