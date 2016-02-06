@@ -37,7 +37,7 @@ $(function() {
 			input = $(element);
 
 			/* On keyup and blur start the validation */
-			input.on('keyup blur submit', function() {
+			input.on('keyup blur', function() {
 
 				isValid = true;
 				
