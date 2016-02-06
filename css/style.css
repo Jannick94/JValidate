@@ -1,10 +1,12 @@
 .has-error {
-	border-color: #E53935;
+	border-color: #E53935 !important;
 }
 .is-valid {
-	border-color: #43A047;
+	border-color: #43A047 !important;
 }
-
 .has-warning {
 	border-color: orange;
+}
+.text-danger {
+	color: #a94442;
 }
