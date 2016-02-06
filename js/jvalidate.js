@@ -21,19 +21,23 @@ $(function() {
 			switchCase,
 			args,
 			messageLocale,
-			isValid;
+			isValid,
+			form;
+
+		/* Store form in form variable */
+		form = this;
 
 		/* Serialize the form */
-		this.serialize();
+		form.serialize();
 
 		/* Find every input the form has */
-		this.find('input').each(function(key, element) {
+		form.find('input').each(function(key, element) {
 			
 			/* Store the input element in cache */
 			input = $(element);
 
 			/* On keyup and blur start the validation */
-			input.on('keyup blur', function() {
+			input.on('keyup blur submit', function() {
 
 				isValid = true;
 				
@@ -224,13 +228,15 @@ $(function() {
 			}
 		}
 		
-		this.on('submit', function(e) {
-			console.log(isValid);
-			e.preventDefault();
-			// if (!isValid) {
-			// 	e.preventDefault();
-			// 	console.log('submit canceled');
-			// }
+		form.on('submit', function(e) {
+			
+			form.find(':input').trigger('blur');
+
+			if (!isValid) {
+				console.log('cancel submit');
+				e.preventDefault();
+			}
+
 		});
 
 	};
