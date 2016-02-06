@@ -5,4 +5,5 @@ var messages = {
 	'min': 'Dit veld moet minimaal %arg% karakters lang zijn!',
 	'max': 'Dit veld mag maximaal %arg% karakters lang zijn!',
 	'email': 'Dit veld moet een e-mailadres zijn!',
+	'url': 'Dit veld moet een URL zijn!'
 }

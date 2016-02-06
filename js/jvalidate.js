@@ -1,5 +1,11 @@
-/* JValidate 0.1 */
-/* Simple and easy to use validation plugin inspired by Laravel validation. */
+/** 
+* JValidate
+* Simple and easy to use validation plugin inspired by Laravel validation.
+* @author Jannick Berkhout
+* @collaborators Martijn de Ridder, Mace Muilman
+* @version 0.1
+* @last-updated 06-02-2016
+*/
 
 $(function() {
 
@@ -7,10 +13,9 @@ $(function() {
 
 		/* Plugin's default settings */
 		var settings = $.extend({
-			validColor: '#43A047',
-			errorColor: '#E53935',
 			errorMessage: false,
-			locale: 'nl'
+			validationDelay: 400,
+			onRemoteDone: function() {}
 		}, options);
 
 		/* Variable declarations */
@@ -22,7 +27,16 @@ $(function() {
 			args,
 			messageLocale,
 			isValid,
-			form;
+			form,
+			validationDelay;
+
+		var delay = (function(){
+			var timer = 0;
+			return function(callback, ms){
+				clearTimeout (timer);
+				timer = setTimeout(callback, ms);
+			};
+		})();
 
 		/* Store form in form variable */
 		form = this;
@@ -57,7 +71,7 @@ $(function() {
 					/* Split argument value on : and store them in validationValue */
 					/* Store key in switchCase variable to use in switch case statement */
 					args            = [];
-					validationValue = value.split(':');
+					validationValue = value.split(/:(.+)?/);
 					switchCase      = validationValue[0];
 
 					/* If rule has arguments, store them in the args array */
@@ -170,11 +184,66 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
+
+							case 'url':
+
+								var re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig
+
+								if(!re.test(elem.val())) {
+									elem.addClass('has-error').removeClass('is-valid');
+									isValid = false;
+								} else {
+									elem.removeClass('has-error').addClass('is-valid');
+									isValid = true;
+								}
+
+								addErrorMessage(elem, switchCase, isValid);
+
+								break;
+
+							case 'remote':
 								
+								/* HTML Attributes */
+								/* data-validation="remote:[URL]", url to call via jQuery AJAX */
+								/* data-validation-delay="[NUMBER]", time in milliseconds, this is to delay the ajax call so the URL doesn't get called every keyup */
+								/* data-validation-valid="[STRING]", validate to compare result of ajax call to, if true, field is valid. */
+								/* Usage example: <input type="text" data-validation="remote:/ajax/script.php" data-validation-valid="true" data-validation-delay="1000" */
+								console.log(elem, args);
+								isValid = false;
+
+								validationDelay  = elem.data('validation-delay') || settings.validationDelay;
+								validationRemote = elem.data('validation-valid');
+
+								delay(function() {
+									$.ajax({
+										url: args,
+										type: 'POST',
+										data: { data: elem.val() }
+									}).done(function(data) {
+										data = $.parseJSON(data);
+										
+										if (data !== validationRemote) {
+											elem.addClass('has-error').removeClass('is-valid');
+											isValid = false;
+											settings.onRemoteDone(data);
+										} else {
+											elem.removeClass('has-error').addClass('is-valid');
+											isValid = true;
+											settings.onRemoteDone(data);
+										}
+									}).fail(function() {
+										elem.addClass('has-error').removeClass('is-valid');
+										isValid = false;
+										console.log('error');
+									});
+								}, validationDelay);
+
+								addErrorMessage(elem, switchCase, isValid);
+
+								break;
 							default: 
 								//Default
 								break;
-								
 						}
 						
 					}
@@ -227,14 +296,23 @@ $(function() {
 
 			}
 		}
-		
+
 		form.on('submit', function(e) {
 			
-			form.find(':input').trigger('blur');
+			e.preventDefault();
 
-			if (!isValid) {
-				console.log('cancel submit');
+			elements = [];
+
+			form.find('input').each(function(key, value) {
+				$(value).trigger('blur');
+				elements.push(isValid);
+			});
+
+			console.log(elements);
+			
+			if (!elements.every(Boolean)) {
 				e.preventDefault();
+				console.log('submit canceled');
 			}
 
 		});

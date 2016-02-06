@@ -45,6 +45,12 @@
                 <div class="form-group">
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="min:5|max:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validation="remote:http://macbook-pro-van-j.local/remote/index.php" data-validation-delay="1000" data-validation-valid="true">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="url" placeholder="URL" data-validation="url">
+				</div>
 
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
@@ -63,7 +69,10 @@
 	$(function() {
 
 		$('.jvalidate-form').jvalidate({
-			errorMessage: true
+			errorMessage: true,
+			onRemoteDone: function(data) {
+
+			}
 		});
 
 	})
