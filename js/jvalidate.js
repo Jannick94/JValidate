@@ -96,7 +96,8 @@ $(function() {
 								
 							case 'number': 
 
-								if(!$.isNumeric(elem.val())) {
+								var re = /^\d+$/;
+								if(!re.test(elem.val())) {
 									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
 								} else {
