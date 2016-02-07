@@ -3,7 +3,8 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<style type="text/css">
 		.form-control:focus {
 			border-color: none!important;
@@ -45,9 +46,9 @@
                 <div class="form-group">
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="min:5|max:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validation="remote:http://macbook-pro-van-j.local/remote/index.php" data-validation-delay="1000" data-validation-valid="true">
-				</div>
+				</div> -->
 				<div class="form-group">
 					<input type="text" class="form-control" name="url" placeholder="URL" data-validation="url">
 				</div>
@@ -60,9 +61,9 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/iban.js"></script>
-<script type="text/javascript" src="js/jvalidate.js"></script>
-<script type="text/javascript" src="js/locale/messages.en.js"></script>
+<script type="text/javascript" src="../js/iban.js"></script>
+<script type="text/javascript" src="../js/jvalidate.js"></script>
+<script type="text/javascript" src="../js/locale/messages.nl.js"></script>
 
 
 <script type="text/javascript">
@@ -70,6 +71,7 @@
 
 		$('.jvalidate-form').jvalidate({
 			errorMessage: true,
+			debug: true,
 			onRemoteDone: function(data) {
 
 			}

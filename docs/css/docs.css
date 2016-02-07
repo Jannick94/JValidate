@@ -1,0 +1,28 @@
+body {
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.nav.nav-stacked > li {
+	font-size: 22px;
+	border-bottom: solid 1px #eee;
+	margin-bottom: 20px;
+}
+
+.nav.nav-stacked ul.list-unstyled li {
+	padding-left: 20px;
+}
+
+.padding-20 {
+	padding: 20px;
+}
+
+.plugin-block h2:hover:before {
+	content: "§";
+	position: absolute;
+	left: -10px;
+	color: #ccc;
+}
+
+.plugin-block h2:hover {
+	cursor: pointer;
+}

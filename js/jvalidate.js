@@ -9,12 +9,15 @@
 
 $(function() {
 
+	'use strict';
+
 	$.fn.jvalidate = function(options) {
 
 		/* Plugin's default settings */
 		var settings = $.extend({
 			errorMessage: false,
 			validationDelay: 400,
+			debug: false,
 			onRemoteDone: function() {}
 		}, options);
 
@@ -22,13 +25,19 @@ $(function() {
 		var validation,
 			input,
 			elem,
-			validationValue,
-			switchCase,
 			args,
+			form,
+			switchCase,
 			messageLocale,
 			isValid,
-			form,
-			validationDelay;
+			validationValue,
+			validationDelay,
+			validationMessage,
+			validationRemote,
+			elements = [],
+			remoteElem,
+			remoteArgs,
+			remoteCase;
 
 		var delay = (function(){
 			var timer = 0;
@@ -208,38 +217,39 @@ $(function() {
 								/* data-validation-delay="[NUMBER]", time in milliseconds, this is to delay the ajax call so the URL doesn't get called every keyup */
 								/* data-validation-valid="[STRING]", validate to compare result of ajax call to, if true, field is valid. */
 								/* Usage example: <input type="text" data-validation="remote:/ajax/script.php" data-validation-valid="true" data-validation-delay="1000" */
-								console.log(elem, args);
-								isValid = false;
-
+								
+								remoteCase       = switchCase;
+								remoteElem       = elem;
+								remoteArgs       = args;
 								validationDelay  = elem.data('validation-delay') || settings.validationDelay;
 								validationRemote = elem.data('validation-valid');
 
 								delay(function() {
 									$.ajax({
-										url: args,
+										url: remoteArgs,
 										type: 'POST',
-										data: { data: elem.val() }
+										data: { data: remoteElem.val() }
 									}).done(function(data) {
 										data = $.parseJSON(data);
 										
 										if (data !== validationRemote) {
-											elem.addClass('has-error').removeClass('is-valid');
+											remoteElem.addClass('has-error').removeClass('is-valid');
+											console.log('ajax not passed');
 											isValid = false;
 											settings.onRemoteDone(data);
 										} else {
-											elem.removeClass('has-error').addClass('is-valid');
-											isValid = true;
+											remoteElem.removeClass('has-error').addClass('is-valid');
+											console.log('ajax passed');
 											settings.onRemoteDone(data);
 										}
 									}).fail(function() {
-										elem.addClass('has-error').removeClass('is-valid');
-										isValid = false;
-										console.log('error');
+										remoteElem.addClass('has-error').removeClass('is-valid');
+										
 									});
 								}, validationDelay);
-
-								addErrorMessage(elem, switchCase, isValid);
-
+								
+								addErrorMessage(remoteElem, remoteCase, isValid);
+								
 								break;
 							default: 
 								//Default
@@ -299,8 +309,6 @@ $(function() {
 
 		form.on('submit', function(e) {
 			
-			e.preventDefault();
-
 			elements = [];
 
 			form.find('input').each(function(key, value) {
@@ -308,11 +316,14 @@ $(function() {
 				elements.push(isValid);
 			});
 
-			console.log(elements);
-			
+			if (settings.debug) {
+				e.preventDefault();
+				console.debug('Debug: on | Submit always canceled');
+				console.debug('Boolean array of form:  ' + elements);
+			}
+
 			if (!elements.every(Boolean)) {
 				e.preventDefault();
-				console.log('submit canceled');
 			}
 
 		});

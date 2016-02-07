@@ -5,5 +5,6 @@ var messages = {
 	'min': 'This field must be at least %arg% characters long!',
 	'max': 'This field can be up to %arg% characters!',
 	'email': 'This field must be an e-mail address!',
-	'url': 'This field needs to be an URL!'
+	'url': 'This field needs to be an URL!',
+	'remote': 'Something went wrong while getting the data!'
 }
