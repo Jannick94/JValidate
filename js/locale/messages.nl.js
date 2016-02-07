@@ -6,5 +6,6 @@ var messages = {
 	'max': 'Dit veld mag maximaal %arg% karakters lang zijn!',
 	'email': 'Dit veld moet een e-mailadres zijn!',
 	'url': 'Dit veld moet een URL zijn!',
-	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!'
+	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!',
+	'custom': 'Dit veld voldoet niet aan de eisen!'
 }
