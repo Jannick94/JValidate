@@ -251,6 +251,20 @@ $(function() {
 								addErrorMessage(remoteElem, remoteCase, isValid);
 								
 								break;
+
+							case 'custom':
+
+								if (window[args]( elem.val() )){
+									elem.removeClass('has-error').addClass('is-valid');
+								} else {
+									elem.addClass('has-error').removeClass('is-valid');
+									isValid = false;
+								}
+
+								addErrorMessage(elem, switchCase, isValid);
+
+							break;
+
 							default: 
 								//Default
 								break;
