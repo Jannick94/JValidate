@@ -267,20 +267,22 @@ $(function() {
 
 							case 'same':
 
-								var fieldName1 = elem.data('name') || '';
-								var fieldName2 = $(args).data('name') || '';
+								var otherField = $(args);
 
-								if (elem.val() == $(args).val()){
+								var fieldName1 = elem.data('name') || '';
+								var fieldName2 = otherField.data('name') || '';
+
+								if (elem.val() == otherField.val()){
 									elem.removeClass('has-error').addClass('is-valid');
-									$(args).removeClass('has-error').addClass('is-valid');
+									otherField.removeClass('has-error').addClass('is-valid');
 								} else {
 									elem.addClass('has-error').removeClass('is-valid');
-									$(args).addClass('has-error').removeClass('is-valid');
+									otherField.addClass('has-error').removeClass('is-valid');
 									isValid = false;
 								}
 
 								addErrorMessage(elem, switchCase, isValid, fieldName2);
-								addErrorMessage($(args), switchCase, isValid, fieldName1);
+								addErrorMessage(otherField, switchCase, isValid, fieldName1);
 
 							break;
 

@@ -8,5 +8,5 @@ var messages = {
 	'url': 'This field needs to be an URL!',
 	'remote': 'Something went wrong while getting the data!',
 	'custom': 'This field does not meet the requirements!',
-	'same': 'This field isnt the same as %arg%!'
+	'same': 'This field isn\'t the same as %arg%!'
 }
