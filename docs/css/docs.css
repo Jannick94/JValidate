@@ -26,3 +26,7 @@ body {
 .plugin-block h2:hover {
 	cursor: pointer;
 }
+
+pre {
+	border: 0px solid transparent;
+}

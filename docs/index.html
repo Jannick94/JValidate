@@ -6,6 +6,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/docs.css">
 	<link rel="stylesheet" type="text/css" href="css/prism.css">
+	<link rel="stylesheet" type="text/css" href="css/prism-theme.css">
 
 </head>
 <body>
@@ -63,31 +64,67 @@
 				<div id="installation" class="plugin-block">
 					<h2>Installation</h2>
 					<article>
-
 						<p>Installation is very simple, just include <code class="language-markup">jvalidate.js</code> before the <code class="language-markup">&lt;/body&gt;</code> tag closes.</p>
-							
-						<code class="language-markup">
-						&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
-						</code>
-
-						<hr>
+<pre>
+<code class="language-markup">&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code>
+</pre>
 						<h4>Dependencies</h4>
 						<ul>
 							<li>IBAN.js (<a href="#">Github link to repository</a>)</li>
 						</ul>
 
-						<p>For IBAN validation JValidate depends on the library IBAN.js, if you need IBAN validation be sure to include <code class="language-markup">IBAN.js</code> after you include <code class="language-markup">jvalidate.js</code></p>
-
-						<code class="language-markup">
-						&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
-						&lt;script src="js/iban.js"&gt;&lt;/script&gt;
-						</code>
+						<p>For IBAN validation JValidate depends on the library IBAN.js, if you need IBAN validation be sure to include <code class="language-markup">IBAN.js</code> after you include <code class="language-markup">jvalidate.js</code>
+						</p>
+<pre>
+<code class="language-markup">&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
+&lt;script src="js/iban.js"&gt;&lt;/script&gt;</code>
+</pre>
 					</article>
 				</div>
+				<hr>
+				<div id="usage" class="plugin-block">
+					<h2>Usage</h2>
+					<article>
+						<p>
+							JValidate is inspired by the way Laravel does validation. Laravel uses pipelines to set validation rules, and so do we. To validate form elements you only need to add a <code class="language-markup">data-validation</code> attribute, followed by the rules.
+						</p>
+						<h4>Example use</h4>
+<pre>
+<code class="language-markup">&lt;input type="text" name="" data-validation="required"&gt;</code>
+</pre>					
+						<h4>Example use of argument rule</h4>
+						<p>When for example using the <em>min</em> rule, you need to provide an argument.</p>
+<pre>
+<code class="language-markup">&lt;input type="text" name="" data-validation="min:3"&gt;</code>
+</pre>
+						<h4>Example use of multiple rules</h4>
+						<p>So, how do you combine these rules? Simple, seperate them by using a pipeline</p>
+<pre>
+<code class="language-markup">&lt;input type="text" name="" data-validation="required|email|max:30"&gt;</code>
+</pre>
+						<h4>Available rules:</h4>
+						<ul>
+							<li>Required</li>
+							<li>Number</li>
+							<li>Email</li>
+							<li>Regular Expression:<em>regex</em></li>
+							<li>Min:<em>argument</em></li>
+							<li>Max:<em>argument</em></li>
+							<li>Custom:<em>custom function</em></li>
+							<li>URL</li>
+						</ul>
+					</article>
+					<hr>
+					<h3>Error messages and handling</h3>
+					<article>
+						<p>By default, JValidate adds an <code class="language-markup">has-error</code> or an <code class="language-markup">is-valid</code> class. This adds and red or green border-color to the input.</p>
 
+						<p>You might want more than that. We've got your back, if you turn on the plugin setting <code class="language-markup">errorMessage</code>, JValidate adds localized error messages after the input. </p>
+					</article>
+				</div>
 			</div>
 		</div>
-		
 	</div>
 	
 </section>
