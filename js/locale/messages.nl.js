@@ -7,5 +7,6 @@ var messages = {
 	'email': 'Dit veld moet een e-mailadres zijn!',
 	'url': 'Dit veld moet een URL zijn!',
 	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!',
-	'custom': 'Dit veld voldoet niet aan de eisen!'
+	'custom': 'Dit veld voldoet niet aan de eisen!',
+	'same': 'Dit veld komt niet overeen met %arg%!'
 }

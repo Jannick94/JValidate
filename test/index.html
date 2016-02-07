@@ -46,6 +46,12 @@
 				<div class="form-group">
 					<input type="text" class="form-control" name="custom" placeholder="Moet 123 zijn!" data-validation="custom:customValidatie">
 				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="same" id="same1" placeholder="Moet het zelfde zijn als same 2" data-validation="same:#same2" data-name="veld 1">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="same" id="same2" placeholder="Moet het zelfde zijn als same 1" data-validation="same:#same1" data-name="veld 2">
+				</div>
                 <div class="form-group">
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="min:5|max:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
@@ -74,7 +80,7 @@
 		if (args == '123'){
 			return true;
 		}
-		
+
 		return false;
 	}
 
