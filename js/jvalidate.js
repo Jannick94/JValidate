@@ -1,4 +1,4 @@
-/** 
+/**
 * JValidate
 * Simple and easy to use validation plugin inspired by Laravel validation.
 * @author Jannick Berkhout
@@ -55,15 +55,15 @@ $(function() {
 
 		/* Find every input the form has */
 		form.find('input').each(function(key, element) {
-			
+
 			/* Store the input element in cache */
 			input = $(element);
 
 			/* On keyup and blur start the validation */
-			input.on('keyup blur', function() {
+			input.on('keyup blur change', function() {
 
 				isValid = true;
-				
+
 				/* Store all set validation rules to array */
 				/* Example use: <input type="text" data-validation="required|min:3|max:10 */
 				validation = $(this).data('validation').split('|');
@@ -87,14 +87,14 @@ $(function() {
 					if (validationValue.length > 1) {
 						args = validationValue[1];
 					}
-					
+
 					if(isValid) {
 
 						switch(switchCase) {
 							case 'required':
 
 								if ($.trim(elem.val()).length === 0) {
-									
+
 									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
 
@@ -108,7 +108,7 @@ $(function() {
 								break;
 
 							case 'iban':
-								
+
 								if(!IBAN.isValid(elem.val())) {
 									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
@@ -120,8 +120,8 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid);
 
 								break;
-								
-							case 'number': 
+
+							case 'number':
 
 								var re = /^\d+$/;
 								if(!re.test(elem.val())) {
@@ -135,8 +135,8 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid);
 
 								break;
-								
-							case 'email': 
+
+							case 'email':
 
 								var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 								if(!re.test(elem.val())) {
@@ -152,8 +152,8 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid);
 
 								break;
-								
-							case 'regex': 
+
+							case 'regex':
 
 								var pattern = new RegExp("["+ args +"]$","i");
 								if(!pattern.test(elem.val())) {
@@ -165,7 +165,7 @@ $(function() {
 								}
 
 								break;
-								
+
 							case 'min':
 
 								if($.trim(elem.val()).length < args) {
@@ -179,7 +179,7 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
-								
+
 							case 'max':
 
 								if($.trim(elem.val()).length > args) {
@@ -211,13 +211,13 @@ $(function() {
 								break;
 
 							case 'remote':
-								
+
 								/* HTML Attributes */
 								/* data-validation="remote:[URL]", url to call via jQuery AJAX */
 								/* data-validation-delay="[NUMBER]", time in milliseconds, this is to delay the ajax call so the URL doesn't get called every keyup */
 								/* data-validation-valid="[STRING]", validate to compare result of ajax call to, if true, field is valid. */
 								/* Usage example: <input type="text" data-validation="remote:/ajax/script.php" data-validation-valid="true" data-validation-delay="1000" */
-								
+
 								remoteCase       = switchCase;
 								remoteElem       = elem;
 								remoteArgs       = args;
@@ -231,7 +231,7 @@ $(function() {
 										data: { data: remoteElem.val() }
 									}).done(function(data) {
 										data = $.parseJSON(data);
-										
+
 										if (data !== validationRemote) {
 											remoteElem.addClass('has-error').removeClass('is-valid');
 											console.log('ajax not passed');
@@ -244,12 +244,12 @@ $(function() {
 										}
 									}).fail(function() {
 										remoteElem.addClass('has-error').removeClass('is-valid');
-										
+
 									});
 								}, validationDelay);
-								
+
 								addErrorMessage(remoteElem, remoteCase, isValid);
-								
+
 								break;
 
 							case 'custom':
@@ -265,20 +265,39 @@ $(function() {
 
 							break;
 
-							default: 
+							case 'same':
+
+								var fieldName1 = elem.data('name') || '';
+								var fieldName2 = $(args).data('name') || '';
+
+								if (elem.val() == $(args).val()){
+									elem.removeClass('has-error').addClass('is-valid');
+									$(args).removeClass('has-error').addClass('is-valid');
+								} else {
+									elem.addClass('has-error').removeClass('is-valid');
+									$(args).addClass('has-error').removeClass('is-valid');
+									isValid = false;
+								}
+
+								addErrorMessage(elem, switchCase, isValid, fieldName2);
+								addErrorMessage($(args), switchCase, isValid, fieldName1);
+
+							break;
+
+							default:
 								//Default
-								break;
+							break;
 						}
-						
+
 					}
-					
+
 				});
 			});
 
 		});
 
 		function addErrorMessage(elem, type, valid, args) {
-			
+
 			/* Make args optional by setting is undefined if not passed to function */
 			args = args || undefined;
 
@@ -322,7 +341,7 @@ $(function() {
 		}
 
 		form.on('submit', function(e) {
-			
+
 			elements = [];
 
 			form.find('input').each(function(key, value) {

@@ -7,5 +7,6 @@ var messages = {
 	'email': 'This field must be an e-mail address!',
 	'url': 'This field needs to be an URL!',
 	'remote': 'Something went wrong while getting the data!',
-	'custom': 'This field does not meet the requirements!'
+	'custom': 'This field does not meet the requirements!',
+	'same': 'This field isnt the same as %arg%!'
 }
