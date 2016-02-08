@@ -37,7 +37,8 @@ $(function() {
 			elements = [],
 			remoteElem,
 			remoteArgs,
-			remoteCase;
+			remoteCase,
+			tabKey;
 
 		var delay = (function(){
 			var timer = 0;
@@ -60,9 +61,14 @@ $(function() {
 			input = $(element);
 
 			/* On keyup and blur start the validation */
-			input.on('keyup blur change', function() {
+			input.on('keyup blur change', function(e) {
 
+				tabKey  = e.which;
 				isValid = true;
+
+				if (tabKey == 0 || tabKey == 9) {
+					return;
+				}
 
 				/* Store all set validation rules to array */
 				/* Example use: <input type="text" data-validation="required|min:3|max:10 */
@@ -94,13 +100,7 @@ $(function() {
 							case 'required':
 
 								if ($.trim(elem.val()).length === 0) {
-
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid);
@@ -110,11 +110,7 @@ $(function() {
 							case 'iban':
 
 								if(!IBAN.isValid(elem.val())) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid);
@@ -125,11 +121,7 @@ $(function() {
 
 								var re = /^\d+$/;
 								if(!re.test(elem.val())) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid);
@@ -140,13 +132,7 @@ $(function() {
 
 								var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 								if(!re.test(elem.val())) {
-									addErrorMessage(elem, switchCase);
-
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid);
@@ -157,23 +143,17 @@ $(function() {
 
 								var pattern = new RegExp("["+ args +"]$","i");
 								if(!pattern.test(elem.val())) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
+
+								addErrorMessage(elem, switchCase, isValid);
 
 								break;
 
 							case 'min':
 
 								if($.trim(elem.val()).length < args) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid, args);
@@ -183,11 +163,7 @@ $(function() {
 							case 'max':
 
 								if($.trim(elem.val()).length > args) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid, args);
@@ -199,11 +175,7 @@ $(function() {
 								var re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig
 
 								if(!re.test(elem.val())) {
-									elem.addClass('has-error').removeClass('is-valid');
 									isValid = false;
-								} else {
-									elem.removeClass('has-error').addClass('is-valid');
-									isValid = true;
 								}
 
 								addErrorMessage(elem, switchCase, isValid);
@@ -234,12 +206,10 @@ $(function() {
 
 										if (data !== validationRemote) {
 											remoteElem.addClass('has-error').removeClass('is-valid');
-											console.log('ajax not passed');
 											isValid = false;
 											settings.onRemoteDone(data);
 										} else {
 											remoteElem.removeClass('has-error').addClass('is-valid');
-											console.log('ajax passed');
 											settings.onRemoteDone(data);
 										}
 									}).fail(function() {
@@ -254,10 +224,7 @@ $(function() {
 
 							case 'custom':
 
-								if (window[args]( elem.val() )){
-									elem.removeClass('has-error').addClass('is-valid');
-								} else {
-									elem.addClass('has-error').removeClass('is-valid');
+								if (!window[args]( elem.val())) {	
 									isValid = false;
 								}
 
@@ -272,12 +239,7 @@ $(function() {
 								var fieldName1 = elem.data('name') || '';
 								var fieldName2 = otherField.data('name') || '';
 
-								if (elem.val() == otherField.val()){
-									elem.removeClass('has-error').addClass('is-valid');
-									otherField.removeClass('has-error').addClass('is-valid');
-								} else {
-									elem.addClass('has-error').removeClass('is-valid');
-									otherField.addClass('has-error').removeClass('is-valid');
+								if (elem.val() != otherField.val()){
 									isValid = false;
 								}
 
@@ -287,7 +249,7 @@ $(function() {
 							break;
 
 							default:
-								//Default
+							//Default
 							break;
 						}
 
@@ -302,12 +264,14 @@ $(function() {
 
 			/* Make args optional by setting is undefined if not passed to function */
 			args = args || undefined;
+			
+			/* Check if element that is passed to function is valid */
+			if (!valid) {
 
-			/* Check if plugin setting is set to true */
-			if(settings.errorMessage) {
+				elem.addClass('has-error').removeClass('is-valid');
 
-				/* Check if element that is passed to function is valid */
-				if (!valid) {
+				/* Check if plugin setting is set to true */
+				if(settings.errorMessage) {	
 
 					/* Prevent message to be added multiple times by checking the length */
 					if (!elem.siblings('span.jvalidate-error-message').length > 0) {
@@ -333,12 +297,12 @@ $(function() {
 						}).insertAfter(elem);
 
 					}
+				} 
 
-				} else if (valid) {
-					/* If the input passes the validation, remove the error message */
-					elem.siblings('span.jvalidate-error-message').remove();
-				}
-
+			} else if (valid) {
+				/* If the input passes the validation, remove the error message */
+				elem.siblings('span.jvalidate-error-message').remove();
+				elem.removeClass('has-error').addClass('is-valid');
 			}
 		}
 
