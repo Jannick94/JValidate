@@ -247,10 +247,47 @@ $(function() {
 								addErrorMessage(otherField, switchCase, isValid, fieldName1);
 
 							break;
+							
+							case 'date':
 
+								var format = args.toLowerCase();
+								var dateString = $.trim(elem.val());
+								var partsnumbers = new Array();
+			
+								if(format == 'dd-mm-yyyy') { if(!/^\d{1,2}-\d{1,2}-\d{4}$/.test(dateString)) { isValid = false; } else { var parts = dateString.split("-"); partsnumbers = [0,1,2]; } }
+								else if(format == 'dd/mm/yyyy') { if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) { isValid = false; } else { var parts = dateString.split("/");  partsnumbers = [0,1,2]; } }
+								else if(format == 'yyyy-mm-dd') { if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(dateString)) { isValid = false; } else { var parts = dateString.split("-"); partsnumbers = [2,1,0]; } }
+								else if(format == 'yyyy/mm/dd') { if(!/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString)) { isValid = false; } else { var parts = dateString.split("/"); partsnumbers = [2,1,0]; } }
+							
+								if(isValid == true) {
+							
+									//Explode the date in parts of day, month and year
+									var day = parseInt(parts[partsnumbers[0]], 10);
+									var month = parseInt(parts[partsnumbers[1]], 10);
+									var year = parseInt(parts[partsnumbers[2]], 10);
+								
+									// Check the ranges of month and year are likely to be ok
+									if(year < 1000 || year > 3000 || month == 0 || month > 12) { isValid = false; } else {
+								
+										var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+									
+										// Adjust for leap years
+										if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) { monthLength[1] = 29; }
+									
+										// Check the range of the day
+										if(day <= 0 || day > monthLength[month - 1]) { isValid = false; } 
+									
+									}
+
+								}
+
+								addErrorMessage(elem, switchCase, isValid, args);
+
+							break;
 							default:
 							//Default
 							break;
+
 						}
 
 					}

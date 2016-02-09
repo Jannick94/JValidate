@@ -1,6 +1,31 @@
 body {
-	padding-top: 70px;
 	font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+	background-color: #dfdfdf;
+    background-image: -webkit-linear-gradient(top,#dddbd1,#d2dbdc);
+    background-image: linear-gradient(to bottom,#dddbd1,#d2dbdc);
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.theme-bar {
+	width: 100%;
+	height: 200px;
+	background-color: #689F38;
+	position: absolute;
+	box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+}
+
+.section {
+	margin: 30px 0px;
+}
+
+.section.section-white .container {
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 6px 2px rgba(0,0,0,0.2);
+	z-index: 2;
+	border-radius: 4px;
 }
 
 .nav.nav-stacked > li {

@@ -47,14 +47,17 @@
 					<input type="text" class="form-control" name="custom" placeholder="Moet 123 zijn!" data-validation="custom:customValidatie">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="same" id="same1" placeholder="Moet het zelfde zijn als same 2" data-validation="same:#same2" data-name="veld 1">
+					<input type="text" class="form-control" name="same" id="same1" placeholder="Moet het zelfde zijn als same 2" data-validation="required|same:#same2" data-name="veld 1">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="same" id="same2" placeholder="Moet het zelfde zijn als same 1" data-validation="same:#same1" data-name="veld 2">
+					<input type="text" class="form-control" name="same" id="same2" placeholder="Moet het zelfde zijn als same 1" data-validation="required|same:#same1" data-name="veld 2">
 				</div>
                 <div class="form-group">
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="min:5|max:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
+				<!-- <div class="form-group">
+					<input type="date" class="form-control" name="date" placeholder="Date (yyyy/mm/dd)" data-validation="date:dd-mm-yyyy">
+				</div> -->
 				<!-- <div class="form-group">
 					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validation="remote:http://macbook-pro-van-j.local/remote/index.php" data-validation-delay="1000" data-validation-valid="true">
 				</div> -->
@@ -72,7 +75,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/iban.js"></script>
 <script type="text/javascript" src="../js/jvalidate.js"></script>
-<script type="text/javascript" src="../js/locale/messages.nl.js"></script>
+<script type="text/javascript" src="../js/locale/messages.en.js"></script>
 
 
 <script type="text/javascript">

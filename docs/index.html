@@ -10,123 +10,106 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-	<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">JValidate</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-				<li><a href="#">Installation</a></li>
-				<li class="dropdown">
-		 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		  			<ul class="dropdown-menu">
-					    <li><a href="#">Action</a></li>
-					    <li><a href="#">Another action</a></li>
-					    <li><a href="#">Something else here</a></li>
-					    <li role="separator" class="divider"></li>
-					    <li><a href="#">Separated link</a></li>
-					    <li role="separator" class="divider"></li>
-					    <li><a href="#">One more separated link</a></li>
-		  			</ul>
-				</li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
-</nav>
-
-<section class="section">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<ul class="nav nav-stacked">
-					<li>Home</li>
-					<ul class="list-unstyled">
-						<li><a href="#">Plugin description</a></li>
+<div class="theme-bar">
+	<section class="section section-white">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="nav nav-stacked">
+						<li>JValidate</li>
+						<ul class="list-unstyled">
+							<li><a href="#">Plugin description</a></li>
+						</ul>
 					</ul>
-				</ul>
-			</div>
-			<div class="col-md-9">
-				<h1>JValidate</h1>
-				<p>jQuery validation plugin inspired by Laravel validation.</p>
-				<hr>
+				</div>
+				<div class="col-md-9">
+					<h1>JValidate</h1>
+					<p>jQuery validation plugin inspired by Laravel validation.</p>
+					<hr>
 
-				<div id="installation" class="plugin-block">
-					<h2>Installation</h2>
-					<article>
-						<p>Installation is very simple, just include <code class="language-markup">jvalidate.js</code> before the <code class="language-markup">&lt;/body&gt;</code> tag closes.</p>
+					<div id="installation" class="plugin-block">
+						<h2>Installation</h2>
+						<article>
+							<p>Installation is very simple, just include <code class="language-markup">jvalidate.js</code> before the <code class="language-markup">&lt;/body&gt;</code> tag closes, and call the plugin on your <code class="language-markup">form</code> element.</p>
 <pre>
 <code class="language-markup">&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function() {
+	$('form').jvalidate();
+});
+&lt;/script&gt;
 &lt;/body&gt;</code>
 </pre>
-						<h4>Dependencies</h4>
-						<ul>
-							<li>IBAN.js (<a href="https://github.com/arhs/iban.js" target="blank">Github link to repository</a>)</li>
-						</ul>
+							<h4>Dependencies</h4>
+							<ul>
+								<li>IBAN.js (<a href="https://github.com/arhs/iban.js" target="blank">Github link to repository</a>)</li>
+							</ul>
 
-						<p>For IBAN validation JValidate depends on the library IBAN.js, if you need IBAN validation be sure to include <code class="language-markup">IBAN.js</code> after you include <code class="language-markup">jvalidate.js</code>
-						</p>
+							<p>For IBAN validation JValidate depends on the library IBAN.js, if you need IBAN validation be sure to include <code class="language-markup">IBAN.js</code> after you include <code class="language-markup">jvalidate.js</code>
+							</p>
 <pre>
 <code class="language-markup">&lt;script src="js/jvalidate.js"&gt;&lt;/script&gt;
 &lt;script src="js/iban.js"&gt;&lt;/script&gt;</code>
 </pre>
-					</article>
-				</div>
-				<hr>
-				<div id="usage" class="plugin-block">
-					<h2>Usage</h2>
-					<article>
-						<p>
-							JValidate is inspired by the way Laravel does validation. Laravel uses pipelines to set validation rules, and so do we. To validate form elements you only need to add a <code class="language-markup">data-validation</code> attribute, followed by the rules.
-						</p>
-						<h4>Example use</h4>
+						</article>
+					</div>
+					<hr>
+					<div id="usage" class="plugin-block">
+						<h2>Usage</h2>
+						<article>
+							<p>
+								JValidate is inspired by the way Laravel does validation. Laravel uses pipelines to set validation rules, and so do we. To validate form elements you only need to add a <code class="language-markup">data-validation</code> attribute, followed by the rules.
+							</p>
+							<h4>Example use</h4>
 <pre>
 <code class="language-markup">&lt;input type="text" name="" data-validation="required"&gt;</code>
 </pre>					
-						<h4>Example use of argument rule</h4>
-						<p>When for example using the <em>min</em> rule, you need to provide an argument.</p>
+							<h4>Example use of argument rule</h4>
+							<p>When for example using the <em>min</em> rule, you need to provide an argument.</p>
 <pre>
 <code class="language-markup">&lt;input type="text" name="" data-validation="min:3"&gt;</code>
 </pre>
-						<h4>Example use of multiple rules</h4>
-						<p>So, how do you combine these rules? Simple, seperate them by using a pipeline</p>
+							<h4>Example use of multiple rules</h4>
+							<p>So, how do you combine these rules? Simple, seperate them by using a pipeline</p>
 <pre>
 <code class="language-markup">&lt;input type="text" name="" data-validation="required|email|max:30"&gt;</code>
 </pre>
-						<h4>Available rules:</h4>
-						<ul>
-							<li>Required</li>
-							<li>Number</li>
-							<li>Email</li>
-							<li>Regular Expression:<em>regex</em></li>
-							<li>Min:<em>argument</em></li>
-							<li>Max:<em>argument</em></li>
-							<li>Custom:<em>custom function</em></li>
-							<li>URL</li>
-						</ul>
-					</article>
-					<hr>
-					<h3>Error messages and handling</h3>
-					<article>
-						<p>By default, JValidate adds an <code class="language-markup">has-error</code> or an <code class="language-markup">is-valid</code> class. This adds and red or green border-color to the input.</p>
+							<h4>Available rules:</h4>
+							<ul>
+								<li>Required</li>
+								<li>Number</li>
+								<li>Email</li>
+								<li>Regular Expression:<em>regex</em></li>
+								<li>Min:<em>argument</em></li>
+								<li>Max:<em>argument</em></li>
+								<li>Custom:<em>custom function</em></li>
+								<li>Same</li>
+								<li>URL</li>
+								<li>Date:<em>dd-mm-yyyy, dd/mm/yyyy, yyyy-mm-dd, yyyy/mm/dd</em></li>
+							</ul>
+						</article>
+						<hr>
+						<h3>Error messages and handling</h3>
+						<article>
+							<p>By default, JValidate adds an <code class="language-markup">has-error</code> or an <code class="language-markup">is-valid</code> class. This adds and red or green border-color to the input.</p>
 
-						<p>You might want more than that. We've got your back, if you turn on the plugin setting <code class="language-markup">errorMessage</code>, JValidate adds localized error messages after the input. </p>
-					</article>
+							<p>But you might want more than that. We've got your back, when you turn on the plugin setting <code class="language-markup">errorMessage</code>, JValidate adds localized error messages after the input. Be sure to include the locale file with the language you prefer.</p>
+<pre>
+<code class="language-markup">&lt;script src="js/locale/messages.en.js"&gt;&lt;/script&gt;</code>
+</pre>
+							<p>If you want to edit these messages you can edit them in de locale file or add an <code class="language-markup">data-validation-message</code> attribute to your input followed by your own message.</p>
+
+<pre>
+<code class="language-markup">&lt;input type="text" name="email" data-validation="email" data-validation-message="You need to provide an email address"&gt;</code>
+</pre>	
+						</article>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+</div>
+
 
 <script type="text/javascript" src="js/prism.js"></script>
 </body>

@@ -8,5 +8,6 @@ var messages = {
 	'url': 'Dit veld moet een URL zijn!',
 	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!',
 	'custom': 'Dit veld voldoet niet aan de eisen!',
-	'same': 'Dit veld komt niet overeen met %arg%!'
+	'same': 'Dit veld komt niet overeen met %arg%!',
+	'date': 'Datum moet in het %arg% formaat zijn!'
 }
