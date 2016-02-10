@@ -9,5 +9,6 @@ var messages = {
 	'remote': 'Something went wrong while getting the data!',
 	'custom': 'This field does not meet the requirements!',
 	'same': 'This field isn\'t the same as %arg%!',
-	'date': 'Date needs to be in the %arg% format!'
+	'date': 'Date needs to be in the %arg% format!',
+	'between': 'This field must between %part1% and %part2%!'
 }

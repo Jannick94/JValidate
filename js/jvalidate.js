@@ -169,6 +169,18 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
+								
+							case 'between':
+
+								var parts = args.split(",");
+
+								if($.trim(elem.val()) < parts[0] || $.trim(elem.val()) > parts[1]) {
+									isValid = false;
+								}
+								
+								addErrorMessage(elem, switchCase, isValid, parts);
+
+								break;
 
 							case 'url':
 
@@ -316,7 +328,9 @@ $(function() {
 						/* If args is not undefined, get the message from locale file and replace %arg% with arguments that are passed to function */
 						/* Example use   : 'min': 'This field needs a minimal length of %arg%' characters */
 						/* Example output: 'This field need a minimal of 5 characters' */
-						if (args !== undefined) {
+						if (args.constructor == Array) {
+							messageLocale = messages[type].replace('%part1%', args[0]).replace('%part2%', args[1]);
+						} else if (args !== undefined) {
 							messageLocale = messages[type].replace('%arg%', args);
 						} else {
 							messageLocale = messages[type];

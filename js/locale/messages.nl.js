@@ -9,5 +9,6 @@ var messages = {
 	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!',
 	'custom': 'Dit veld voldoet niet aan de eisen!',
 	'same': 'Dit veld komt niet overeen met %arg%!',
-	'date': 'Datum moet in het %arg% formaat zijn!'
+	'date': 'Datum moet in het %arg% formaat zijn!',
+	'between': 'Dit veld moet tussen %part1% en %part2% zijn!'
 }
