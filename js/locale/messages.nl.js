@@ -1,4 +1,5 @@
 var messages = {
+	'default': 'Dit veld is niet correct ingevuld!',
 	'required': 'Dit veld is verplicht!',
 	'iban': 'Dit veld moet een IBAN nummer zijn!',
 	'number': 'Dit veld moet een nummer bevatten!',

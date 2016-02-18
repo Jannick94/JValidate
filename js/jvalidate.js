@@ -38,7 +38,8 @@ $(function() {
 			remoteElem,
 			remoteArgs,
 			remoteCase,
-			tabKey;
+			tabKey,
+			checkboxCount;
 
 		var delay = (function(){
 			var timer = 0;
@@ -55,7 +56,7 @@ $(function() {
 		form.serialize();
 
 		/* Find every input the form has */
-		form.find('input').each(function(key, element) {
+		form.find('[data-validation]').each(function(key, element) {
 
 			/* Store the input element in cache */
 			input = $(element);
@@ -101,9 +102,26 @@ $(function() {
 
 								if ($.trim(elem.val()).length === 0) {
 									isValid = false;
-								}
+								} 
 
 								addErrorMessage(elem, switchCase, isValid);
+
+								break;
+
+							case 'group':
+
+								/*Argument with group case isn't required, make it optional if it's not set*/
+								if (args.length < 1) {
+									args = 1;
+								}
+								
+								checkboxCount = elem.find('input[type="checkbox"]:checked, input[type="radio"]:checked').length;
+
+								if (checkboxCount < args) {
+									isValid = false;
+								}
+
+								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
 
@@ -169,19 +187,7 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
-								
-							case 'between':
-
-								var parts = args.split(",");
-
-								if($.trim(elem.val()) < parts[0] || $.trim(elem.val()) > parts[1]) {
-									isValid = false;
-								}
-								
-								addErrorMessage(elem, switchCase, isValid, parts);
-
-								break;
-
+							
 							case 'url':
 
 								var re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig
@@ -328,10 +334,12 @@ $(function() {
 						/* If args is not undefined, get the message from locale file and replace %arg% with arguments that are passed to function */
 						/* Example use   : 'min': 'This field needs a minimal length of %arg%' characters */
 						/* Example output: 'This field need a minimal of 5 characters' */
-						if (args.constructor == Array) {
-							messageLocale = messages[type].replace('%part1%', args[0]).replace('%part2%', args[1]);
-						} else if (args !== undefined) {
-							messageLocale = messages[type].replace('%arg%', args);
+						if (args !== undefined) {
+							try {
+								messageLocale = messages[type].replace('%arg%', args)
+							} catch(err) {
+								messageLocale = messages['default'];
+							}
 						} else {
 							messageLocale = messages[type];
 						}
@@ -361,10 +369,13 @@ $(function() {
 
 			elements = [];
 
-			form.find('input').each(function(key, value) {
+			form.find('[data-validation]').each(function(key, value) {
 				$(value).trigger('blur');
 				elements.push(isValid);
 			});
+
+			/*On submit find first input with error and focus the input*/
+			$('[data-validation].has-error:first').focus();
 
 			if (settings.debug) {
 				e.preventDefault();

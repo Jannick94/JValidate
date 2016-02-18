@@ -1,4 +1,5 @@
 var messages = {
+	'default': 'This field isn\'t filled in correctly!',
 	'required': 'This field is required!',
 	'iban': 'This field needs to be an IBAN number!',
 	'number': 'This field needs to be a number!',
@@ -10,5 +11,6 @@ var messages = {
 	'custom': 'This field does not meet the requirements!',
 	'same': 'This field isn\'t the same as %arg%!',
 	'date': 'Date needs to be in the %arg% format!',
-	'between': 'This field must between %part1% and %part2%!'
+	'between': 'This field must between %part1% and %part2%!',
+	'group': 'You need to select atleast %arg%!'
 }

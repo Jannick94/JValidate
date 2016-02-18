@@ -22,25 +22,41 @@
 			<hr>
 
 			<form action="" method="post" class="jvalidate-form">
-				<div class="form-group">
-					<input type="text" class="form-control" name="voornaam" placeholder="Voornaam" data-validation="required">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control" name="voornaam" placeholder="Voornaam" data-validation="required">
+						</div>	
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control" name="achternaam" placeholder="Achternaam" data-validation="required">
+					  </div>
+					</div>	
 				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" name="achternaam" placeholder="Achternaam" data-validation="required">
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control" name="iban" placeholder="IBAN" data-validation="iban">
+						</div>	
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control" name="number" placeholder="Nummer" data-validation="number">
+						</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" name="iban" placeholder="IBAN" data-validation="iban">
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" name="number" placeholder="Nummer" data-validation="number">
-				</div>
+				
 				<div class="form-group">
 					<input type="text" class="form-control" name="email" placeholder="Email" data-validation="email">
 				</div>
-                <div class="form-group">
+    			<div class="form-group">
 					<input type="text" class="form-control" name="regex" placeholder="Regex (alleen cijfers en letters)" data-validation="regex:a-z0-9">
 				</div>
-                <div class="form-group">
+        		<div class="form-group">
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10" data-validation="min:5|max:10">
 				</div>
 				<div class="form-group">
@@ -56,13 +72,55 @@
 					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="min:5|max:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
 				<div class="form-group">
-					<input type="date" class="form-control" name="date" placeholder="Date (dd-mm-yyyy)" data-validation="date:dd-mm-yyyy">
+					<input type="text" class="form-control" name="date" placeholder="Date (dd-mm-yyyy)" data-validation="date:dd-mm-yyyy">
 				</div>
-                <div class="form-group">
-					<input type="text" class="form-control" name="between" placeholder="Between 100 and 200" data-validation="between:100,200">
+				<div class="form-group">
+					<select class="form-control" data-validation="required">
+						<option value="">Select an option</option>
+						<option value="1">Option 1</option>
+						<option value="2">Option 2</option>
+						<option value="3">Option 3</option>
+					</select>
 				</div>
-                <div class="form-group">
-					<input type="text" class="form-control" name="between" placeholder="Between a and d" data-validation="between:a,d">
+				<div class="form-group">
+					<div class="checkbox" data-validation="group:1">
+						<label>
+							<input type="checkbox">
+							Checkbox 1
+						</label>
+						<label>
+							<input type="checkbox">
+							Checkbox 2
+						</label>
+						<label>
+							<input type="checkbox">
+							Checkbox 3
+						</label>
+						<label>
+							<input type="checkbox">
+							Checkbox 4
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="radio" data-validation="group">
+						<label>
+							<input type="radio" name="radio">
+							Radio 1
+						</label>
+						<label>
+							<input type="radio" name="radio">
+							Radio 2
+						</label>
+						<label>
+							<input type="radio" name="radio">
+							Radio 3
+						</label>
+						<label>
+							<input type="radio" name="radio">
+							Radio 4
+						</label>
+					</div>
 				</div>
 				<!-- <div class="form-group">
 					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validation="remote:http://macbook-pro-van-j.local/remote/index.php" data-validation-delay="1000" data-validation-valid="true">
