@@ -360,9 +360,11 @@ $(function() {
 										isValid = false;
 									}
 
-									addErrorMessage(elem, switchCase, isValid);
-
+								} else {
+									isValid = false;
 								}
+
+								addErrorMessage(elem, switchCase, isValid);
 
 								break;
 							default:

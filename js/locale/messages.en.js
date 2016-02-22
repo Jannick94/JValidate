@@ -14,5 +14,5 @@ var messages = {
 	'same': 'This field isn\'t the same as %arg%!',
 	'date': 'Date needs to be in the %arg% format!',
 	'group': 'You need to select atleast %arg%!',
-	'file': 'You can\'t upload a file with this filetype!'
+	'file': 'You need to select an accepted file type!'
 }
