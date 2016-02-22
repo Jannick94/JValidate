@@ -39,7 +39,9 @@ $(function() {
 			remoteArgs,
 			remoteCase,
 			tabKey,
-			checkboxCount;
+			checkboxCount,
+			parsedArgs,
+			parsedVal;
 
 		var delay = (function(){
 			var timer = 0;
@@ -168,7 +170,7 @@ $(function() {
 
 								break;
 
-							case 'min':
+							case 'minlength':
 
 								if($.trim(elem.val()).length < args) {
 									isValid = false;
@@ -178,7 +180,7 @@ $(function() {
 
 								break;
 
-							case 'max':
+							case 'maxlength':
 
 								if($.trim(elem.val()).length > args) {
 									isValid = false;
@@ -188,6 +190,34 @@ $(function() {
 
 								break;
 							
+							case 'min':
+
+								var parsedArgs = parseFloat(args);
+								var parsedVal  = parseFloat(elem.val());
+
+								if (parsedVal < parsedArgs) {
+									isValid = false;
+								}
+								
+								addErrorMessage(elem, switchCase, isValid, args);
+
+								break;
+
+							case 'max':
+
+								var parsedArgs = parseFloat(args);
+								var parsedVal  = parseFloat(elem.val());
+
+								if (parsedArgs !== NaN && parsedVal !== NaN) {
+									if (parsedVal > parsedArgs) {
+										isValid = false;
+									}
+								}
+
+								addErrorMessage(elem, switchCase, isValid, args);
+
+								break;
+
 							case 'url':
 
 								var re = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig
