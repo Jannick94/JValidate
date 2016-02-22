@@ -12,5 +12,7 @@ var messages = {
 	'remote': 'Er is iets fout gegaan tijdens het ophalen van de data!',
 	'custom': 'Dit veld voldoet niet aan de eisen!',
 	'same': 'Dit veld komt niet overeen met %arg%!',
-	'date': 'Datum moet in het %arg% formaat zijn!'
+	'date': 'Datum moet in het %arg% formaat zijn!',
+	'group': 'U moet er minstens %arg% selecteren!',
+	'file': 'U kunt dit bestandstype niet uploaden!'
 }

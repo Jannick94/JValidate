@@ -3,8 +3,8 @@
 * Simple and easy to use validation plugin inspired by Laravel validation.
 * @author Jannick Berkhout
 * @collaborators Martijn de Ridder, Mace Muilman
-* @version 0.1
-* @last-updated 06-02-2016
+* @version 0.2
+* @last-updated 22-02-2016
 */
 
 $(function() {
@@ -41,7 +41,10 @@ $(function() {
 			tabKey,
 			checkboxCount,
 			parsedArgs,
-			parsedVal;
+			parsedVal,
+			extension,
+			extensionKey,
+			extensions;
 
 		var delay = (function(){
 			var timer = 0;
@@ -198,7 +201,7 @@ $(function() {
 								if (parsedVal < parsedArgs) {
 									isValid = false;
 								}
-								
+
 								addErrorMessage(elem, switchCase, isValid, args);
 
 								break;
@@ -244,30 +247,33 @@ $(function() {
 								validationDelay  = elem.data('validation-delay') || settings.validationDelay;
 								validationRemote = elem.data('validation-valid');
 
-								delay(function() {
-									$.ajax({
-										url: remoteArgs,
-										type: 'POST',
-										data: { data: remoteElem.val() }
-									}).done(function(data) {
-										data = $.parseJSON(data);
+								if ($.trim(elem.val()).length !== 0) {
+									
+									delay(function() {
 
-										if (data !== validationRemote) {
-											remoteElem.addClass('has-error').removeClass('is-valid');
-											isValid = false;
-											settings.onRemoteDone(data);
-										} else {
-											remoteElem.removeClass('has-error').addClass('is-valid');
-											settings.onRemoteDone(data);
-										}
-									}).fail(function() {
-										remoteElem.addClass('has-error').removeClass('is-valid');
+										$.ajax({
+											url: remoteArgs,
+											type: 'POST',
+											data: { data: remoteElem.val() }
+										}).done(function(data) {
+											data = $.parseJSON(data);
 
-									});
-								}, validationDelay);
+											if (data !== validationRemote) {
+												isValid = false;
+												addErrorMessage(remoteElem, remoteCase, isValid);
+												settings.onRemoteDone(data);
+											} else {
+												isValid = true;
+												addErrorMessage(remoteElem, remoteCase, isValid);
+												settings.onRemoteDone(data);
+											}
+										});
+									}, validationDelay);
 
-								addErrorMessage(remoteElem, remoteCase, isValid);
-
+								} else {
+									isValid = false;
+								}
+								
 								break;
 
 							case 'custom':
@@ -332,6 +338,33 @@ $(function() {
 								addErrorMessage(elem, switchCase, isValid, args);
 
 							break;
+
+							case 'file': 
+
+								console.log(isValid);
+								//if files array has been set
+								if (elem[0].files.length > 0) {
+									
+									extensions   = args.split(',');
+									extension    = elem[0].files[0].name;
+									extensionKey = extension.lastIndexOf('.');
+									
+									if (extensionKey != -1) {
+									    extension = extension.substr(extensionKey);
+									    if (extension.charAt(0) === '.') {
+									    	extension = extension.substr(1);
+									    }
+									}
+
+									if (extensions.indexOf(extension) === -1) {
+										isValid = false;
+									}
+
+									addErrorMessage(elem, switchCase, isValid);
+
+								}
+
+								break;
 							default:
 							//Default
 							break;
@@ -400,8 +433,10 @@ $(function() {
 			elements = [];
 
 			form.find('[data-validation]').each(function(key, value) {
-				$(value).trigger('blur');
-				elements.push(isValid);
+				
+				$(value).trigger('blur');	
+				elements.push(isValid);	
+
 			});
 
 			/*On submit find first input with error and focus the input*/

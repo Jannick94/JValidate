@@ -13,6 +13,6 @@ var messages = {
 	'custom': 'This field does not meet the requirements!',
 	'same': 'This field isn\'t the same as %arg%!',
 	'date': 'Date needs to be in the %arg% format!',
-	'between': 'This field must between %part1% and %part2%!',
-	'group': 'You need to select atleast %arg%!'
+	'group': 'You need to select atleast %arg%!',
+	'file': 'You can\'t upload a file with this filetype!'
 }
