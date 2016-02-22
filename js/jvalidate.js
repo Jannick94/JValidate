@@ -3,7 +3,7 @@
 * Simple and easy to use validation plugin inspired by Laravel validation.
 * @author Jannick Berkhout
 * @collaborators Martijn de Ridder, Mace Muilman
-* @version 0.2
+* @version 0.2.1
 * @last-updated 22-02-2016
 */
 
