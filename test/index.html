@@ -25,13 +25,13 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="voornaam" placeholder="Voornaam" data-validation="required">
+							<input type="text" class="form-control" name="voornaam" placeholder="Voornaam" data-validate="required">
 						</div>	
 					</div>
 
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="achternaam" placeholder="Achternaam" data-validation="required">
+							<input type="text" class="form-control" name="achternaam" placeholder="Achternaam" data-validate="required">
 					  </div>
 					</div>	
 				</div>
@@ -39,46 +39,46 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="iban" placeholder="IBAN" data-validation="iban">
+							<input type="text" class="form-control" name="iban" placeholder="IBAN" data-validate="iban">
 						</div>	
 					</div>
 					
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" name="number" placeholder="Nummer" data-validation="number">
+							<input type="text" class="form-control" name="number" placeholder="Nummer" data-validate="number">
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<input type="text" class="form-control" name="email" placeholder="Email" data-validation="email">
+					<input type="text" class="form-control" name="email" placeholder="Email" data-validate="email">
 				</div>
     			<div class="form-group">
-					<input type="text" class="form-control" name="regex" placeholder="Regex (alleen cijfers en letters)" data-validation="regex:a-z0-9">
+					<input type="text" class="form-control" name="regex" placeholder="Regex (alleen cijfers en letters)" data-validate="regex:a-z0-9">
 				</div>
         		<div class="form-group">
-					<input type="text" class="form-control" name="minlength" placeholder="Minimaal 5, Maximaal 10" data-validation="minlength:5|maxlength:10">
+					<input type="text" class="form-control" name="minlength" placeholder="Minimaal 5, Maximaal 10" data-validate="minlength:5|maxlength:10">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="min" placeholder="Min 5 maximaal 100" data-validation="required|min:5|max:100">
+					<input type="text" class="form-control" name="min" placeholder="Min 5 maximaal 100" data-validate="required|min:5|max:100">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="custom" placeholder="Moet 123 zijn!" data-validation="custom:customValidatie">
+					<input type="text" class="form-control" name="custom" placeholder="Moet 123 zijn!" data-validate="custom:customValidatie">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="same" id="same1" placeholder="Moet het zelfde zijn als same 2" data-validation="required|same:#same2" data-name="veld 1">
+					<input type="text" class="form-control" name="same" id="same1" placeholder="Moet het zelfde zijn als same 2" data-validate="required|same:#same2" data-name="veld 1">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="same" id="same2" placeholder="Moet het zelfde zijn als same 1" data-validation="required|same:#same1" data-name="veld 2">
+					<input type="text" class="form-control" name="same" id="same2" placeholder="Moet het zelfde zijn als same 1" data-validate="required|same:#same1" data-name="veld 2">
 				</div>
                 <div class="form-group">
-					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validation="minlength:5|maxlength:10|regex:\!\@\#\$\%\^\&\*\(\)">
+					<input type="text" class="form-control" name="min" placeholder="Minimaal 5, Maximaal 10, Alleen leestekens" data-validate="minlength:5|maxlength:10|regex:\!\@\#\$\%\^\&\*\(\)">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="date" placeholder="Date (dd-mm-yyyy)" data-validation="date:dd-mm-yyyy">
+					<input type="text" class="form-control" name="date" placeholder="Date (dd-mm-yyyy)" data-validate="date:dd-mm-yyyy">
 				</div>
 				<div class="form-group">
-					<select class="form-control" data-validation="required">
+					<select class="form-control" data-validate="required">
 						<option value="">Select an option</option>
 						<option value="1">Option 1</option>
 						<option value="2">Option 2</option>
@@ -86,7 +86,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<div class="checkbox" data-validation="group:3">
+					<div class="checkbox" data-validate="group:3">
 						<label>
 							<input type="checkbox">
 							Checkbox 1
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="radio" data-validation="group">
+					<div class="radio" data-validate="group">
 						<label>
 							<input type="radio" name="radio">
 							Radio 1
@@ -126,13 +126,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validation="remote:http://macbook-pro-van-j.local/remote/index.php" data-validation-delay="600" data-validation-valid="true">
+					<input type="text" class="form-control" name="remote" placeholder="Ajax" data-validate="remote:http://macbook-pro-van-j.local/remote/index.php" data-validate-delay="600" data-validate-valid="true">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" name="url" placeholder="URL" data-validation="url">
+					<input type="text" class="form-control" name="url" placeholder="URL" data-validate="url">
 				</div>
 				<div class="form-group">
-					<input type="file" class="form-control" name="file" data-validation="file:png,jpg,jpeg">
+					<input type="file" class="form-control" name="file" data-validate="file:png,jpg,jpeg">
 				</div>
 
 				<button type="submit" class="btn btn-default">Submit</button>
@@ -144,7 +144,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/iban.js"></script>
-<script type="text/javascript" src="../js/jvalidate.js"></script>
+<script type="text/javascript" src="../js/jvalidate.min.js"></script>
 <script type="text/javascript" src="../js/locale/messages.en.js"></script>
 
 
