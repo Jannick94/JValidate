@@ -3,8 +3,8 @@
 * Simple and easy to use validation plugin inspired by Laravel validation.
 * @author Jannick Berkhout
 * @collaborators Martijn de Ridder, Mace Muilman
-* @version 0.2.2
-* @last-updated 23-02-2016
+* @version 0.2.3
+* @last-updated 25-02-2016
 */
 
 $(function() {
@@ -99,7 +99,7 @@ $(function() {
 					if (validationValue.length > 1) {
 						args = validationValue[1];
 					}
-					
+
 					if(isValid) {
 
 						switch(switchCase) {
