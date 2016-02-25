@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/docs.css">
 	<link rel="stylesheet" type="text/css" href="css/prism.css">
 	<link rel="stylesheet" type="text/css" href="css/prism-theme.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 
 </head>
 <body>
@@ -58,21 +59,21 @@ $(function() {
 						<h2>Usage</h2>
 						<article>
 							<p>
-								JValidate is inspired by the way Laravel does validation. Laravel uses pipelines to set validation rules, and so do we. To validate form elements you only need to add a <code class="language-markup">data-validation</code> attribute, followed by the rules.
+								JValidate is inspired by the way Laravel does validation. Laravel uses pipelines to set validation rules, and so do we. To validate form elements you only need to add a <code class="language-markup">data-validate</code> attribute, followed by the rules.
 							</p>
 							<h4>Example use</h4>
 <pre>
-<code class="language-markup">&lt;input type="text" name="" data-validation="required"&gt;</code>
+<code class="language-markup">&lt;input type="text" name="" data-validate="required"&gt;</code>
 </pre>					
 							<h4>Example use of argument rule</h4>
 							<p>When for example using the <em>min</em> rule, you need to provide an argument.</p>
 <pre>
-<code class="language-markup">&lt;input type="text" name="" data-validation="min:3"&gt;</code>
+<code class="language-markup">&lt;input type="text" name="" data-validate="min:3"&gt;</code>
 </pre>
 							<h4>Example use of multiple rules</h4>
 							<p>So, how do you combine these rules? Simple, seperate them by using a pipeline</p>
 <pre>
-<code class="language-markup">&lt;input type="text" name="" data-validation="required|email|max:30"&gt;</code>
+<code class="language-markup">&lt;input type="text" name="" data-validate="required|email|max:30"&gt;</code>
 </pre>
 							<h4>Available rules:</h4>
 							<ul>
@@ -82,10 +83,13 @@ $(function() {
 								<li>Regular Expression:<em>regex</em></li>
 								<li>Min:<em>argument</em></li>
 								<li>Max:<em>argument</em></li>
-								<li>Custom:<em>custom function</em></li>
+								<li>Minlength:<em>argument</em></li>
+								<li>Maxlength:<em>argument</em></li>
+								<li>Custom:<em>function</em></li>
 								<li>Same</li>
 								<li>URL</li>
 								<li>Date:<em>dd-mm-yyyy, dd/mm/yyyy, yyyy-mm-dd, yyyy/mm/dd</em></li>
+								<li>Group:<em>integer</em></li>
 							</ul>
 						</article>
 						<hr>
@@ -97,11 +101,58 @@ $(function() {
 <pre>
 <code class="language-markup">&lt;script src="js/locale/messages.en.js"&gt;&lt;/script&gt;</code>
 </pre>
-							<p>If you want to edit these messages you can edit them in de locale file or add an <code class="language-markup">data-validation-message</code> attribute to your input followed by your own message.</p>
+							<p>If you want to edit these messages you can edit them in de locale file or add an <code class="language-markup">data-validate-message</code> attribute to your input followed by your own message.</p>
 
 <pre>
-<code class="language-markup">&lt;input type="text" name="email" data-validation="email" data-validation-message="You need to provide an email address"&gt;</code>
+<code class="language-markup">&lt;input type="text" name="email" data-validate="email" data-validate-message="You need to provide an email address"&gt;</code>
 </pre>	
+						</article>
+					</div>
+					<hr>
+					<div id="examples" class="plugin-block">
+						<h2>Examples</h2>
+						<article>
+							<p>Examples of all the rules of the validator.</p>
+
+							<form class="jvalidate-docs">
+								<div class="form-group">
+									<p><code class="language-markup">required</code></p>
+									<input type="text" class="material-input" placeholder="Required" data-validate="required">
+								</div>
+
+								<div class="form-group">
+									<p><code class="language-markup">number</code></p>
+									<input type="text" class="material-input" placeholder="Number" data-validate="number">
+								</div>
+
+								<div class="form-group">
+									<p><code class="language-markup">email</code></p>
+									<input type="text" class="material-input" placeholder="Email" data-validate="email">
+								</div>
+
+								<div class="form-group">
+									<p><code class="language-markup">minlength:5</code></p>
+									<input type="text" class="material-input" placeholder="Minlength" data-validate="minlength:5">
+								</div>
+
+								<div class="form-group">
+									<p><code class="language-markup">maxlength:10</code></p>
+									<input type="text" class="material-input" placeholder="Maxlength" data-validate="maxlength:10">
+								</div>
+								<div class="form-group">
+									<p><code class="language-markup">min:50</code></p>
+									<input type="text" class="material-input" placeholder="Min" data-validate="min:50">
+								</div>
+
+								<div class="form-group">
+									<p><code class="language-markup">max:100</code></p>
+									<input type="text" class="material-input" placeholder="Max" data-validate="max:100">
+								</div>
+
+								<div class="form-group">
+									<button type="submit" class="btn material-btn">Send</button>
+								</div>
+							</form>
 						</article>
 					</div>
 				</div>
@@ -112,5 +163,18 @@ $(function() {
 
 
 <script type="text/javascript" src="js/prism.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jvalidate.js"></script>
+<script type="text/javascript" src="../js/locale/messages.en.js"></script>
+<script type="text/javascript">
+	
+	$(function() {
+		$('.jvalidate-docs').jvalidate({
+			debug: true,
+			errorMessage: true
+		});
+	})
+
+</script>
 </body>
 </html>

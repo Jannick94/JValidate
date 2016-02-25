@@ -56,3 +56,28 @@ body {
 pre {
 	border: 0px solid transparent;
 }
+
+.material-input {
+	padding: 6px;
+	width: 100%;
+	border: 0;
+	border-bottom: 1px solid #eee;
+}
+
+.material-input:focus {
+	outline: 0;
+	border-color: #ddd;
+}
+
+.has-error.material-input:focus, .is-valid.material-input:focus {
+	border-width: 2px;
+}
+
+.material-btn {
+	text-transform: uppercase;
+	background-color: #689F38;
+	color: #fff;
+	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
+	padding: 6px 20px;
+	border-radius: 2px;
+}

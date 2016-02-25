@@ -99,7 +99,7 @@ $(function() {
 					if (validationValue.length > 1) {
 						args = validationValue[1];
 					}
-
+					
 					if(isValid) {
 
 						switch(switchCase) {
@@ -434,12 +434,12 @@ $(function() {
 			elements = [];
 
 			form.find('[data-validate]').each(function(key, value) {
-				$(value).trigger('blur');
+				$(value).trigger('keyup');
 				elements.push(isValid);
 			});
 
 			/*On submit find first input with error and focus the input*/
-			$('[data-validate].has-error:first').focus();
+			// $('[data-validate].has-error:first').focus();
 
 			if (settings.debug) {
 				e.preventDefault();
