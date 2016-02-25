@@ -439,7 +439,7 @@ $(function() {
 			});
 
 			/*On submit find first input with error and focus the input*/
-			// $('[data-validate].has-error:first').focus();
+			$('[data-validate].has-error:first').focus();
 
 			if (settings.debug) {
 				e.preventDefault();
