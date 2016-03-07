@@ -3,11 +3,11 @@
 * Simple and easy to use validation plugin inspired by Laravel validation.
 * @author Jannick Berkhout
 * @collaborators Martijn de Ridder, Mace Muilman
-* @version 0.2.3
-* @last-updated 25-02-2016
+* @version 0.2.4
+* @last-updated 07-03-2016
 */
 
-$(function() {
+jQuery(function($) {
 
 	'use strict';
 
